@@ -1,7 +1,12 @@
 {% include 'recipes/partials/head.html' %}
-
-<body>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
     {% include 'recipes/partials/header.html' %}
+    <title>{% block title %} {% endblock %}Recipes</title>
+
+</head>
+<body>
     {% include 'recipes/partials/search.html' %}
 
     <main class="main-content-container">
