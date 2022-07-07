@@ -1,10 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
+from utils.recipes.factory import make_recipe
 
 
 def home(request):
-    return render(request, 'recipes/pages/index.html')
+    return render(request, 'recipes/pages/index.html', context={
+        'recipes': [make_recipe() for _ in range(10)],
+    })
 
 
 def recipes(request, id):
-    return render(request, 'recipes/pages/recipe-view.html')
+    return render(request, 'recipes/pages/recipe-view.html', context={
+        'recipe': make_recipe(),
+        'is_detail_page': True,
+    })
