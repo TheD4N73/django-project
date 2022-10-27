@@ -5,7 +5,7 @@ from utils.pagination import make_pagination
 from .models import Recipe
 import os
 
-PER_PAGE = os.environ.get('PER_PAGE', 9)
+PER_PAGE = int(os.environ.get('PER_PAGE', 9))
 
 
 def home(request):
