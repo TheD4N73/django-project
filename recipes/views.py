@@ -18,6 +18,8 @@ def home(request):
     page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
 
     messages.success(request, 'Você foi pesquisar algo que eu vi!')
+    messages.error(request, 'Você foi pesquisar algo que eu vi!')
+    messages.info(request, 'Você foi pesquisar algo que eu vi!')
 
     return render(request, 'recipes/pages/index.html', context={
         'recipes': page_obj,
