@@ -9,7 +9,7 @@ def add_attr(field, attr_name, attr_new_val):
 
 
 def add_placeholder(field, placeholder_val):
-    field.widget.attrs['placeholder'] = f'{placeholder_val}'.strip()
+    add_attr(field, 'placeholder', placeholder_val)
 
 
 class RegisterForm(forms.ModelForm):
