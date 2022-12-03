@@ -10,17 +10,14 @@ class RecipeHomeViewTest(RecipeTestBase):
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
 
-    @skip('Unresolved error but all work')
     def test_recipe_home_view_return_status_code_200(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertEqual(response.status_code, 200)
 
-    @skip('Unresolved error but all work')
     def test_recipe_home_view_loads_correct_template(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/index.html')
 
-    @skip('Unresolved error but all work')
     def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
@@ -36,8 +33,6 @@ class RecipeHomeViewTest(RecipeTestBase):
         self.assertIn('Recipe Title', content)
         self.assertEqual(len(response_context_recipes), 1)
 
-
-    @skip
     def test_recipe_home_template_do_not_load_recipes_not_published(self):
         """If test recipe is_published False don't show"""
         self.make_recipe(is_published=False)
