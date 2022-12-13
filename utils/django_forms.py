@@ -20,5 +20,5 @@ def strong_password(password):
             'one lowercase letter and one number. The length should be '
             'at least 8 characters.'
         ),
-            code='invalid'
+            code='Invalid'
         )

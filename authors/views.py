@@ -26,7 +26,7 @@ def register_create(request):
 
     if form.is_valid():
         user = form.save(commit=False)
-        user.set_password(user.password)
+        user.set_password(request.POST['password'])
         user.save()
         messages.success(request, 'Your user is created, please log in.')
 
