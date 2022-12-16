@@ -343,6 +343,11 @@ a {
   color: var(--color-debug-dark);
 }
 
+/* authors */
+.login-message {
+    margin: 1rem 0;
+}
+
 @media (max-width: 600px) {
     .main-content-list,
     .form-content-grid {
