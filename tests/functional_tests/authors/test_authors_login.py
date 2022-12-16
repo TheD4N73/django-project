@@ -1,7 +1,6 @@
 import pytest
 from .base import AuthorsBaseTest
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -29,6 +28,60 @@ class AuthorsLoginTest(AuthorsBaseTest):
 
         # User see the login successfully message
         self.assertIn(
-            f'You are logged in with {user.username}.',
+            f'Your are logged in with {user.username}.',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
+
+    def test_login_create_raises_404_if_not_POST_method(self):
+        self.browser.get(self.live_server_url + reverse('authors:login_create'))
+
+        self.assertIn(
+            'Not Found',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
+
+    def test_form_login_is_invalid(self):
+        # User open the login page
+        self.browser.get(self.live_server_url + reverse('authors:login'))
+
+        # User see login form
+        form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+
+        # Try send blank data
+        username_field = self.get_by_placeholder(form, 'Type your username')
+        password_field = self.get_by_placeholder(form, 'Type your password')
+
+        username_field.send_keys(' ')
+        password_field.send_keys(' ')
+
+        # User send form
+        form.submit()
+
+        # See a error message
+        self.assertIn(
+            'Invalid username or password',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
+
+    def test_form_login_invalid_credentials(self):
+        # User open the login page
+        self.browser.get(self.live_server_url + reverse('authors:login'))
+
+        # User see login form
+        form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+
+        # User send data with errors
+        username_field = self.get_by_placeholder(form, 'Type your username')
+        password_field = self.get_by_placeholder(form, 'Type your password')
+
+        username_field.send_keys('invalid_user')
+        password_field.send_keys('invalid_password')
+
+        # User send form
+        form.submit()
+
+        # See a error message
+        self.assertIn(
+            'Invalid credentials',
             self.browser.find_element(By.TAG_NAME, 'body').text
         )
