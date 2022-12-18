@@ -5,6 +5,11 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from recipes.models import Recipe
+from utils.pagination import make_pagination
+import os
+
+PER_PAGE = int(os.environ.get('PER_PAGE', 9))
 
 
 def register_view(request):
@@ -85,4 +90,18 @@ def logout_view(request):
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def dashboard(request):
-    return render(request, 'authors/pages/dashboard.html')
+    recipes = Recipe.objects.filter(
+        is_published=False,
+        author=request.user,
+    )
+
+    page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
+
+    return render(
+        request,
+        'authors/pages/dashboard.html',
+        context={
+            'recipes': page_obj,
+            'pagination_range': pagination_range,
+        }
+    )
