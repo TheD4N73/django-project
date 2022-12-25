@@ -162,11 +162,11 @@ def dashboard_recipe_create_view(request):
         recipe.save()
 
         messages.success(request, 'Your recipe has been created successfully!')
-        return redirect(reverse('authors:dashboard', args=(recipe.id,)))
+        return redirect(reverse('authors:dashboard_recipe_edit', args=(recipe.id,)))
 
     return render(
         request,
-        'authors/pages/dashboard_recipe_create.html',
+        'authors/pages/dashboard_recipe.html',
         context={
             'form': form,
             'form_action': reverse('authors:dashboard_recipe_create_view')
