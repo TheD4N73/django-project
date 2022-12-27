@@ -1,6 +1,6 @@
 import os
-from .forms import RegisterForm, LoginForm
-from .forms.recipe_form import AuthorRecipeForm
+from authors.forms import RegisterForm, LoginForm
+from authors.forms.recipe_form import AuthorRecipeForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -95,7 +95,7 @@ def dashboard(request):
     recipes = Recipe.objects.filter(
         is_published=False,
         author=request.user,
-    )
+    ).order_by('-id')
 
     page_obj, pagination_range = make_pagination(request, recipes, PER_PAGE)
 
