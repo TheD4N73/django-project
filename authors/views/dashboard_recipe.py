@@ -5,8 +5,14 @@ from authors.forms.recipe_form import AuthorRecipeForm
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
 class DashboardRecipe(View):
     def get_recipe(self, id=None):
         recipe = None
@@ -58,3 +64,15 @@ class DashboardRecipe(View):
             return redirect(reverse('authors:dashboard_recipe_edit', args=(recipe.id,)))
 
         return self.render_recipe(form)
+
+
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
+class DashboardRecipeDelete(DashboardRecipe):
+    def post(self, *args, **kwargs):
+        recipe = self.get_recipe(self.request.POST.get('id'))
+        recipe.delete()
+        messages.success(self.request, 'Deleted successfully')
+        return redirect(reverse('authors:dashboard'))
