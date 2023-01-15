@@ -14,7 +14,7 @@ class Tag(models.Model):
     # Representação do model que queremos encaixar
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     # Representação do ID da linha do model descrito acima
-    object_id = models.CharField()
+    object_id = models.CharField(max_length=255)
     # Campo que representa a relação genérica conhece os campos acima
     content_object = GenericForeignKey('content_type')
 
