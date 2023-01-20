@@ -86,12 +86,26 @@ a {
     text-decoration: none;
 }
 
+/* Generics */
+
 .center {
     text-align: center;
 }
 
 .left {
     text-align: left;
+}
+
+.m-x {
+  margin: 0 var(--spacing-gutter-medium);
+}
+
+.m-y {
+  margin: var(--spacing-gutter-medium) 0;
+}
+
+.hidden-text {
+  display: none;
 }
 
 .container {
