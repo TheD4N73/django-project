@@ -77,10 +77,6 @@ h6 {
     font-family: var(--font-headings);
 }
 
-img {
-    max-width: 100%;
-}
-
 a {
     color: var(--color-primary);
     text-decoration: none;
