@@ -1,12 +1,15 @@
 import os
 from .models import Recipe
 from django.db.models import Q
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
+from django.http.response import Http404
 from django.views.generic import ListView, DetailView
-from utils.pagination import make_pagination
 from django.forms.models import model_to_dict
 from django.shortcuts import render
+from django.utils import translation
+from django.utils.translation import gettext as _
 from tag.models import Tag
+from utils.pagination import make_pagination
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 9))
 
@@ -48,7 +51,15 @@ class RecipeListViewBase(ListView):
             ctx.get('recipes'),
             PER_PAGE
         )
-        ctx.update({'recipes': page_obj, 'pagination_range': pagination_range})
+
+        html_language = translation.get_language()
+
+        ctx.update(
+            {'recipes': page_obj,
+             'pagination_range': pagination_range,
+             'html_language': html_language,
+             }
+        )
         return ctx
 
 
@@ -80,8 +91,11 @@ class RecipeListViewCategory(RecipeListViewBase):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
+
+        category_translation = _('Category')
+
         ctx.update({
-            'title': f'{ctx.get("recipes")[0].category.name} - Category | '
+            'title': f'{ctx.get("recipes")[0].category.name} - { category_translation } | '
         })
 
         return ctx
@@ -131,8 +145,10 @@ class RecipeListViewTag(RecipeListViewBase):
         ctx = super().get_context_data(*args, **kwargs)
         page_title = Tag.objects.filter(slug=self.kwargs.get('slug', '')).first()
 
+        text_translation = _('No recipes found')
+
         if not page_title:
-            page_title = 'No recipes found'
+            page_title = f' "{text_translation}" '
 
         page_title = f'{page_title} - Tag |'
 

@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from django.db.models.functions import Concat
 from django.db.models import Value, F
 from tag.models import Tag
+from django.utils.translation import gettext_lazy as _
 
 
 class Category(models.Model):
@@ -14,6 +15,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
 
 class RecipeManager(models.Manager):
@@ -33,23 +38,23 @@ class RecipeManager(models.Manager):
 
 class Recipe(models.Model):
     objects = RecipeManager()
-    title = models.CharField(max_length=65)
-    description = models.CharField(max_length=165)
+    title = models.CharField(max_length=65, verbose_name=_('Title'))
+    description = models.CharField(max_length=165, verbose_name=_('Description'))
     slug = models.SlugField(unique=True)
-    preparation_time = models.IntegerField()
-    preparation_time_unit = models.CharField(max_length=20)
-    servings = models.IntegerField()
-    servings_unit = models.CharField(max_length=20)
-    preparation_steps = models.TextField()
-    preparation_steps_is_html = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='')
+    preparation_time = models.IntegerField(verbose_name=_('Preparation time'))
+    preparation_time_unit = models.CharField(max_length=20, verbose_name=_('Preparation time unit'))
+    servings = models.IntegerField(verbose_name=_('Servings'))
+    servings_unit = models.CharField(max_length=20, verbose_name=_("Servings unit"))
+    preparation_steps = models.TextField(verbose_name=_('Preparation steps'))
+    preparation_steps_is_html = models.BooleanField(default=False, verbose_name=_('Preparation steps is html'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created at'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated at'))
+    is_published = models.BooleanField(default=False, verbose_name=_('Is published'))
+    cover = models.ImageField(upload_to='recipes/covers/%Y/%m/%d/', blank=True, default='', verbose_name=_('Cover'))
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None
+        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None, verbose_name=_('Category')
     )
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_('Author'))
 
     tags = models.ManyToManyField(Tag, blank=True, default='')
 
@@ -81,3 +86,7 @@ class Recipe(models.Model):
 
         if error_messages:
             raise ValidationError(error_messages)
+
+    class Meta:
+        verbose_name = _('Recipe')
+        verbose_name_plural = _('Recipes')
