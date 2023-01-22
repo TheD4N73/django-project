@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-22 00:34-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: recipes/models.py:20 recipes/models.py:55 recipes/views.py:95
+msgid "Category"
+msgstr "Categoria"
+
+#: recipes/models.py:21
+#, fuzzy
+#| msgid "Category"
+msgid "Categories"
+msgstr "Categorias"
+
+#: recipes/models.py:41
+msgid "Title"
+msgstr "Título"
+
+#: recipes/models.py:42
+msgid "Description"
+msgstr "Descrição"
+
+#: recipes/models.py:44
+#, fuzzy
+#| msgid "Preparation"
+msgid "Preparation time"
+msgstr "Tempo de preparo"
+
+#: recipes/models.py:45
+#, fuzzy
+#| msgid "Preparation"
+msgid "Preparation time unit"
+msgstr "Unidade de tempo de preparo"
+
+#: recipes/models.py:46 recipes/templates/recipes/partials/recipe.html:64
+msgid "Servings"
+msgstr "Porções"
+
+#: recipes/models.py:47
+#, fuzzy
+#| msgid "Servings"
+msgid "Servings unit"
+msgstr "Unidade de porções"
+
+#: recipes/models.py:48
+#, fuzzy
+#| msgid "Preparation"
+msgid "Preparation steps"
+msgstr "Passo a passo"
+
+#: recipes/models.py:49
+#, fuzzy
+#| msgid "Preparation"
+msgid "Preparation steps is html"
+msgstr "Passo a passo é html"
+
+#: recipes/models.py:50
+msgid "Created at"
+msgstr "Criado em"
+
+#: recipes/models.py:51
+msgid "Updated at"
+msgstr "Atualizado em"
+
+#: recipes/models.py:52
+msgid "Is published"
+msgstr "Está publicado"
+
+#: recipes/models.py:53
+msgid "Cover"
+msgstr "Imagem"
+
+#: recipes/models.py:57
+msgid "Author"
+msgstr "Autor"
+
+#: recipes/models.py:91
+msgid "Recipe"
+msgstr "Receita"
+
+#: recipes/models.py:92
+msgid "Recipes"
+msgstr "Receitas"
+
+#: recipes/templates/recipes/partials/recipe.html:58
+msgid "Preparation"
+msgstr "Preparo"
+
+#: recipes/templates/recipes/partials/recipe.html:75
+#, fuzzy
+msgid "Read more"
+msgstr "Ver mais..."
+
+#: recipes/views.py:148
+msgid "No recipes found"
+msgstr "Nenhuma receita encontrada"
