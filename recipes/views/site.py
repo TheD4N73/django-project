@@ -1,5 +1,5 @@
 import os
-from .models import Recipe
+from recipes.models import Recipe
 from django.db.models import Q
 from django.http import JsonResponse
 from django.http.response import Http404
